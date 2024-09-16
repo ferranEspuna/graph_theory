@@ -9,6 +9,7 @@
 \usepackage{fullpage}
 \usepackage{xcolor}
 \usepackage{textcomp}
+\usepackage{graphicx}
 
 \newtheorem*{theirtheorem}{Theorem}
 \newtheorem*{theirproposition}{Proposition}
@@ -84,7 +85,7 @@
         \item Finally, we can go back to the original copy of $x_1$, thus completing the cycle.
     \end{itemize}
 
-    \begin{proposition}
+    \begin{proposition}\label{prop:1}
         The cartesian product of two Hamiltonian graphs is Hamiltonian.
         \begin{proof}
             \vspace{-6mm}
@@ -113,6 +114,23 @@
             But because both $y_1$ and $y_{s-1}$ are connected to $y_s$, this is fine.
                 \end{proof}
     \end{proposition}
+
+    \begin{figure}[!tbp]
+        \centering
+        \begin{minipage}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth, trim={6.5cm 5cm 18.5cm 3cm},clip]{media/product}
+            \caption{$G_1 \square G_2$ where $G_1$ is the $3$-cycle $ABC$ and $G_2$ is the $5$-cycle
+            $PQRST$. \color[HTML]{6557D2} Violet \color{black} edges are the ones corresponding
+            to copies of $G_1$ and \color[HTML]{2E7D32} green \color{black} edges are the ones corresponding to copies of $G_2$.}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{0.49\textwidth}
+            \includegraphics[width=\textwidth, trim={6.5cm 4.5cm 18.5cm 3cm},clip]{media/path}
+            \caption{Hamiltonian path constructed in the proposition above, starting at $AP$. Edges are colored the same color as their endpoint in the proposition.}
+        \end{minipage}
+
+    \label{fig:figure}
+    \end{figure}
 
     \begin{rk}
         The case for $r$ even can be made easier by just doing
