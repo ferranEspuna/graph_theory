@@ -148,14 +148,15 @@
     \begin{proposition}
         The hypercube $Q^n$ is Hamiltonian.
         \begin{proof}
-             We proceed by induction:
+            Assume the notation $V(Q^1) = \{0, 1\}$, $V(Q^n) = \{0, 1\}^n$.
+            We proceed by induction:
             \begin{itemize}
                 \item For $n \in \{2, 3\}$, just construct the cycles ``by hand'':
                 \begin{itemize}
                     \item $(0, 0), (0, 1), (1, 1), (1, 0), (0, 0)$
                     \item $(0, 0, 0), (0, 0, 1), (0, 1, 1), (0, 1, 0), (1, 1, 0), (1, 1, 1), (1, 0, 1), (1, 0, 0), (0, 0, 0)$
                 \end{itemize}
-                \item For higher $n$, we can use the fact that $Q^n = Q^{n-2} \square Q^2$, which is Hamiltonian by the previous proposition.
+                \item For higher $n$, we can use the fact that $Q^n \cong Q^{n-2} \square Q^2$, which is Hamiltonian by the previous proposition.
             \end{itemize}
         \end{proof}
     \end{proposition}
