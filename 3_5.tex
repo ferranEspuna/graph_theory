@@ -95,12 +95,12 @@
             \begin{equation}
                 \mathbb{P}(d(v) \geq 2) \leq
                 \sum_{(s, t) \in \binom{V(G) \setminus \{v\}}{2}} \mathbb{P}(v \sim s \text{ and } v \sim t) =
-                \binom{n-1}{2} p(n)^2
+                \binom{n-1}{2} p(n)^2 < n^2 p(n)^2
                 \label{eq:equation3}
             \end{equation}
             Substituting~\eqref{eq:equation3} into~\eqref{eq:equation}, we get
             \begin{equation}
-                \mathbb{E}(X) \leq n \binom{n-1}{2} p(n)^2 \leq \frac{1}{2} n^3 p(n)^2 = \frac{1}{2} n^{3 + 2\alpha}
+                \mathbb{E}(X) < n \cdot n^2 p(n)^2 = n^3 p(n)^2 = n^{3 + 2\alpha}
                 \label{eq:equation4}
             \end{equation}
             But since $\alpha < -3/2$, we have that $3 + 2\alpha < 0$ and thus $\mathbb{E}(X) \to 0$ as $n \to \infty$.
