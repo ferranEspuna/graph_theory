@@ -1,0 +1,122 @@
+\documentclass{amsart}
+\renewcommand{\baselinestretch}{1.1}
+\setlength{\parskip}{2mm}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{graphicx}
+
+\newtheorem*{theirtheorem}{Theorem}
+\newtheorem*{theirproposition}{Proposition}
+
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{\textbf{Theorem}}
+\newtheorem*{lemma}{\textbf{Lemma}}
+\newtheorem*{corollary}{\textbf{Corollary}}
+\newtheorem*{proposition}{\textbf{Proposition}}
+\newtheorem*{claim}{\textbf{Claim}}
+\newtheorem*{conjecture}{\textbf{Conjecture}}
+
+\theoremstyle{definition}
+\newtheorem*{rk}{\textbf{Remark}}
+
+\newcommand{\Summ}[1]{\underset{#1}{\sum}}
+\newcommand{\sti}[2]{\left\{\begin{array}{c} #1 \\ #2 \end{array}\right\}}
+
+\newcommand{\diam}{\emph{diam}}
+\newcommand{\conv}{\mbox{Conv}}
+\newcommand{\C}{\mathcal {C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\D}{\mathcal{D}}
+
+\newcommand{\ov}[1]{\overline{#1}}
+
+\newcommand{\nn}{\nonumber}
+
+\def\st{2}
+
+\thispagestyle{empty}
+
+\begin{document}
+
+    {\Large Graph Theory -- MAMME}
+    {\Large Chapter 3 -- Random Graphs I}
+
+    \vspace{0.5cm}
+
+    \hrule
+
+    \vspace{0.5cm}
+
+    \noindent \textbf{Problem 5:}
+    Show that if $p(n) = n^{\alpha}$ for $\alpha < -3/2$, then
+    a.a.s. $\mathbb{G}_{n, p(n)}$ consists of independent edges.
+
+
+    \paragraph{\textbf{Solution (by Ferran Espuña):}}
+    Note that the condition stated in the problem is equivalent to
+    all vertices having degree less than $2$.
+    For our purposes, we only need to show that it is sufficient:
+    Indeed, if two edges share a vertex, then that vertex has degree at least $2$.
+
+    \begin{proposition}
+        If $p(n) = n^{\alpha}$ for $\alpha < -3/2$, then a.a.s.\
+        all vertices in $\mathbb{G}_{n, p(n)}$ have degree less than $2$.
+
+        \begin{proof}
+            \vspace{-3mm}
+            Fixing $n$, Let $G = \mathbb{G}_{n, p(n)}$ and $X$
+            be the number of vertices of degree at least $2$ in $G$.
+            Then,
+            \begin{equation}
+                \mathbb{E}(X) = \sum_{v\in(G)} \mathbb{P}(d(v) \geq 2)\label{eq:equation}
+            \end{equation}
+            However, for any $v \in V(G)$, we have that
+            \begin{equation}
+                d(v) \geq 2 \iff v \sim s \text{ and } v \sim t \text{ for some }
+                s, t \in V(G) \text{ with } s \neq t; \, s, t \neq v
+                \label{eq:equation2}
+            \end{equation}
+            Note that this condition does not depend on the order of $s$ and $t$.
+            by the union bound, we have that
+            \begin{equation}
+                \mathbb{P}(d(v) \geq 2) \leq
+                \sum_{(s, t) \in \binom{V(G) \setminus \{v\}}{2}} \mathbb{P}(v \sim s \text{ and } v \sim t) =
+                \binom{n-1}{2} p(n)^2
+                \label{eq:equation3}
+            \end{equation}
+            Substituting~\eqref{eq:equation3} into~\eqref{eq:equation}, we get
+            \begin{equation}
+                \mathbb{E}(X) \leq n \binom{n-1}{2} p(n)^2 \leq \frac{1}{2} n^3 p(n)^2 = \frac{1}{2} n^{3 + 2\alpha}
+                \label{eq:equation4}
+            \end{equation}
+            But since $\alpha < -3/2$, we have that $3 + 2\alpha < 0$ and thus $\mathbb{E}(X) \to 0$ as $n \to \infty$.
+            By Markov's inequality, we have that
+            \begin{equation}
+                \mathbb{P}(X \geq 1) \leq \mathbb{E}(X) \to 0 \text{ as } n \to \infty
+                \label{eq:equation5}
+            \end{equation}
+            And thus, a.a.s. $X = 0$, that is, all vertices have degree less than $2$.
+        \end{proof}
+    \end{proposition}
+
+
+
+
+
+
+\end{document}
+
