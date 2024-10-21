@@ -92,17 +92,17 @@
 
     \begin{proof}
         \vspace{-3mm}
-        We will assume condition~\ref{itm:1} does not hold, and we will bound the probability of
-        condition~\ref{itm:2} \emph{failing for the first time} at some $k \in [k^{-}, \, k^{+}]$.
-        For this, note that condition~\ref{itm:2} holding for all previous steps implies that
+        We will assume condition~\eqref{itm:1} does not hold, and we will bound the probability of
+        condition~\eqref{itm:2} \emph{failing for the first time} at some $k \in [k^{-}, \, k^{+}]$.
+        For this, note that condition~\eqref{itm:2} holding for all previous steps implies that
         the process has not stopped before $k$.
 
         \noindent Let $Z_k$ be the set of vertices seen up to step $k$.
         That is, $Z_k = A_k \cup \{x_1, \cdots, x_k\}$ so that $|Z_k| = |A_k| + k$.
-        We will shift our focus to $Z_k$ and bound the probability of $|A_k| < \frac{ck}{2} < \frac{c-1}{2}k + k$.
-        At each step $k'$ up to $k$, because we have only conditioned on the total number of seen vertices being high,
-        the number of vertices in $Z_k$ distributed at least as a binomial,
-        where each vertex has $k$ independent chances of being seen.
+        We will shift our focus to $Z_k$ and bound the probability of $|Z_k| < \frac{ck}{2} < \frac{c-1}{2}k + k$.
+        Because we have only conditioned on the total number of seen vertices being high,
+        the number of vertices in $Z_k$ distributed at least as a binomial
+        where each vertex has $k$ independent chances of being seen (once at each step $k'$ up to $k$).
         That is,
         \begin{equation}
             |Z_k| \geq \overline{Z_k} \sim \text{Binom}\left(n, 1 - (1 - p)^k\right)
@@ -141,20 +141,20 @@
     Because $k \geq k^-$, each term is at most
     \begin{equation}
         e^{-\frac{\delta^2}{2}\mathbb{E}(\overline{Z_{k^-}})} \leq
-        e^{-\frac{\delta^2ck^-}{2}} \leq
-        e^{-\frac{c\delta^2M(c)\log(n)}{2}} =
-        n^{-\frac{cM(c)\delta^2}{2}}
+        e^{-\frac{\delta^2ck^-}{4}} \leq
+        e^{-\frac{c\delta^2M(c)\log(n)}{4}} =
+        n^{-\frac{cM(c)\delta^2}{4}}
         \label{eq:logbound}
     \end{equation}
     So the probability of the condition failing at any point in $[k^{-}, \, k^{+}]$ is at most
     \begin{equation}
-        n^{\frac{2}{3}}n^{-\frac{cM(c)\delta^2}{2}} = n^{\frac{2}{3} - \frac{cM(c)\delta^2}{2}} =
-        n^{\frac{4- 3cM(c)\delta^2}{6}}
+        n^{\frac{2}{3}}n^{-\frac{cM(c)\delta^2}{4}} = n^{\frac{2}{3} - \frac{cM(c)\delta^2}{4}} =
+        n^{\frac{8 - 3cM(c)\delta^2}{12}}
         \label{eq:finalbound}
     \end{equation}
-    \noindent For this to be $o(1)$, we need $4 - 3cM(c)\delta^2$ to be negative.
+    \noindent For this to be $o(1)$, we need $8 - 3cM(c)\delta^2$ to be negative.
     To give a sufficient condition, take $\epsilon = \frac{1}{2}$ Then $\delta =  1 - \frac{2}{3} = \frac{1}{3}$.
-    We need $4 - \frac{cM(c)}{3} < 0$, which is equivalent to $M(c) > \frac{12}{c}$.
+    We need $8 - \frac{cM(c)}{3} < 0$, which is equivalent to $M(c) > \frac{24}{c}$.
     \end{proof}
 
 \end{document}
