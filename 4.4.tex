@@ -49,7 +49,7 @@
 
 \newcommand{\nn}{\nonumber}
 
-\def\st{2}
+\newcommand{\st}{2}
 
 \thispagestyle{empty}
 
@@ -121,6 +121,21 @@
     \end{equation}
     \begin{claim}
         This bound is increasing in $k$ % todo: prove this
+
+        \begin{proof}
+            Differentiating the right-hand side of~\eqref{eq:ff} with respect to $k$ using the quotient rule, we get
+            the numerator
+            \begin{equation}
+                \frac{p}{2}\left(\left(1 - e^{-pk}\right) - k\left(pke^{-pk}\right)\right) = \frac{p}{2}\left(1 - e^{-pk}\left(1 + pk\right)\right)
+                \label{eq:diff_num}
+            \end{equation}
+            Which equals 0 when $k=0$ and itself is increasing in $k$:
+            \begin{equation}
+                \frac{d}{dk}e^{-pk}\left(1 + pk\right) = -p e^{-pk} \left(1 + pk\right) + p e^{-pk} = -pk e^{-pk} < 0
+                \label{eq:diff_num2}
+            \end{equation}
+        \end{proof}
+        
     \end{claim}
     \noindent Plugging in $k = k^{+}$, we get, as $n \to \infty$,
     \begin{equation}
@@ -130,7 +145,11 @@
         \label{eq:fbound_2}
     \end{equation}
     For some small $\epsilon > 0$.
-    Therefore, the $\delta$ in Chernoff's bound is positive, and we can apply it:
+    \begin{rk}
+        This bound also works for any $k^+ = o(n)$, not just $n^{\frac{2}{3}}$.
+    \end{rk}
+
+    \noindent Anyway, the $\delta$ in Chernoff's bound is bounded below by a positive constant, and we can apply:
     \begin{equation}
         \mathbb{P}\left(\overline{Z_k} < \frac{ck}{2}\right) =
         \mathbb{P}\left(\overline{Z_k} < (1 - \delta)\mathbb{E}(\overline{Z_k})\right) \leq
@@ -141,12 +160,12 @@
     Because $k \geq k^-$, each term is at most
     \begin{equation}
         e^{-\frac{\delta^2}{2}\mathbb{E}(\overline{Z_{k^-}})} \leq
-        e^{-\frac{\delta^2ck^-}{4}} \leq
-        e^{-\frac{c\delta^2M(c)\log(n)}{4}} =
+        e^{-\frac{\delta^{2}ck^-}{4}} \leq
+        e^{-\frac{c\delta^{2}M(c)\log(n)}{4}} =
         n^{-\frac{cM(c)\delta^2}{4}}
         \label{eq:logbound}
     \end{equation}
-    So the probability of the condition failing at any point in $[k^{-}, \, k^{+}]$ is at most
+    The probability of the condition failing at any point in $[k^{-}, \, k^{+}]$ is at most
     \begin{equation}
         n^{\frac{2}{3}}n^{-\frac{cM(c)\delta^2}{4}} = n^{\frac{2}{3} - \frac{cM(c)\delta^2}{4}} =
         n^{\frac{8 - 3cM(c)\delta^2}{12}}
