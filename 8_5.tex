@@ -121,9 +121,12 @@
             This corresponds to the number $P_{i, p}$ of paths of length $p$ from a given vertex $v_i$.
             Let's try to approximate this number.
 
-            At each step of the path, the height (distance from the root) either increases by $1$ (we say we go \emph{down})
-            or decreases by $1$ (we say we go \emph{up}). Because both at the start and end of the path the height must be in the range $[0, k]$, the difference
-            betwen the number of \emph{up} steps $s_{u}$ and the number of \emph{down} steps $s_{d}$ must satisfy
+            At each step of the path, the height (distance from the root) either increases by $1$
+            (we say we go \emph{down})
+            or decreases by $1$ (we say we go \emph{up}).
+            Because both at the start and end of the path the height must be in the range $[0, k]$,
+            the difference between the number of \emph{up} steps $s_{u}$
+            and the number of \emph{down} steps $s_{d}$ must satisfy
 
             \begin{equation*}
                 \lvert s_{u} - s_{d} \rvert \leq k
@@ -134,7 +137,7 @@
             \end{equation*}
             All together,
             \begin{equation*}
-                \frac{p}{2} - k \leq s_d \leq  \frac{p}{2} + k
+                \frac{p-k}{2} \leq s_d \leq  \frac{p+k}{2}
             \end{equation*}
 
             If we go \emph{up}, there is only one choice (the parent of the current node).
@@ -146,16 +149,16 @@
             \begin{equation*}
                 P_{i,p}
                 \leq
-                \sum_{s_d = \frac{p}{2} - k}^{\frac{p}{2} + k} \binom{p}{s_d} (d-1)^{s_d}
+                \sum_{s_d = (p-k)/2}^{(p+k)/2} \binom{p}{s_d} (d-1)^{s_d}
                 \leq
                 2 \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}
             \end{equation*}
 
             Putting this together with~\eqref{eq:norm_bound}, we get
             \begin{equation*}
-                \norm{A}_2^p \leq 2 \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}
-                \implies
-                \norm{A}_2 \leq \lim_{p \to \infty}  \left( 2 \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}\right)^{\frac{1}{p}} = 2 \sqrt{d-1}
+                \norm{A}_2^p \leq 2 \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}} \implies
+                \norm{A}_2 \leq \lim_{p \to \infty}
+                \left( 2 \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}\right)^{\frac{1}{p}} = 2 \sqrt{d-1}
             \end{equation*}
         \end{proof}
     \end{proposition}
@@ -169,7 +172,8 @@
             $\norm{B}_2 \geq \frac{1}{\sqrt{n}} \norm{B}_\infty$, where $n$ is the size of the matrix.
             We repeat the same calculation for the number of paths of length $p$ from a given vertex $v_i$,
             but now we need to bound it below.
-            Because of the maximum in the formula in the $\infty$-norm, we're free to choose the startring vertex $v_i$.
+            Because of the maximum in the formula in the $\infty$-norm,
+            we're free to choose the starting vertex $v_i$.
             We will choose the root.
             We're also free to choose $p = 2k$.
             If we restrict ourselves to paths that come back to the root, we get $s_d = s_u = k$.
@@ -180,7 +184,7 @@
                 \norm{A(k)}_2^{2k} =
                 \norm{A(k)^{2k}}_2\geq
                 \frac{1}{\sqrt{n}} P_{1, 2k} \geq
-                \frac{1}{\sqrt{n}} C_k (d-1)^k \geq
+                \frac{1}{\sqrt{n}} C_k (d-1)^k =
                 \frac{1}{(k+1)\sqrt{n}} \binom{2k}{k} (d-1)^k \geq
                 \frac{4^k}{(k+1)2\sqrt{kn}} (d-1)^k
             \end{equation*}
@@ -188,7 +192,15 @@
             Which implies
 
             \begin{equation*}
-                \norm{A(k)}_2 \geq \lim_{k \to \infty} \left( \frac{4^k}{(k+1)2\sqrt{kn}} (d-1)^k \right)^{\frac{1}{2k}} = 2 \sqrt{d-1}
+                \liminf_{k \to \infty} \norm{A(k)}_2 \geq
+                \lim_{k \to \infty} \left( \frac{4^k}{(k+1)2\sqrt{kn}} (d-1)^k \right)^{\frac{1}{2k}}
+                = 2 \sqrt{d-1}
+            \end{equation*}
+
+            Together with part~\ref{item:a}, we have that
+
+            \begin{equation*}
+                \lim_{k \to \infty} \norm{A(k)}_2 = 2 \sqrt{d-1}
             \end{equation*}
 
         \end{proof}
