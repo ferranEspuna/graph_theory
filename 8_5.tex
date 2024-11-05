@@ -1,0 +1,95 @@
+\documentclass{amsart}
+\renewcommand{\baselinestretch}{1.1}
+\setlength{\parskip}{2mm}
+
+\pagestyle{empty}
+
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage[margin=70pt]{geometry}
+\usepackage{mathtools}
+
+\newtheorem*{theirtheorem}{Theorem}
+\newtheorem*{theirproposition}{Proposition}
+
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{\textbf{Theorem}}
+\newtheorem*{lemma}{\textbf{Lemma}}
+\newtheorem*{corollary}{\textbf{Corollary}}
+\newtheorem*{proposition}{\textbf{Proposition}}
+\newtheorem*{claim}{\textbf{Claim}}
+\newtheorem*{conjecture}{\textbf{Conjecture}}
+
+\theoremstyle{definition}
+\newtheorem*{rk}{\textbf{Remark}}
+
+\newcommand{\Summ}[1]{\underset{#1}{\sum}}
+\newcommand{\sti}[2]{\left\{\begin{array}{c} #1 \\ #2 \end{array}\right\}}
+
+\newcommand{\diam}{\emph{diam}}
+\newcommand{\conv}{\mbox{Conv}}
+\newcommand{\C}{\mathcal {C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\D}{\mathcal{D}}
+
+\newcommand{\ov}[1]{\overline{#1}}
+
+\newcommand{\nn}{\nonumber}
+
+\newcommand{\st}{2}
+
+\thispagestyle{empty}
+
+\begin{document}
+
+    {\Large Graph Theory -- MAMME}
+    {\Large Session 8 -- Spectral Graph Theory II}
+
+    \vspace{0.5cm}
+
+    \hrule
+
+    \vspace{0.5cm}
+
+    \noindent \textbf{Problem 4:}
+    Let $T_{d, k}$ be a $(d-1)$-ary rooted tree of height $k$.
+
+    \begin{enumerate}
+        \item[(a)] Show that $\lambda_1(T_{d, k}) \leq 2 \sqrt{d - 1}$ \label{item:a}
+        \item[(b)] Show that $\lim_{k \to \infty} \lambda_1(T_{d, k}) = 2 \sqrt{d - 1}$ \label{item:b}
+    \end{enumerate}
+
+
+    \paragraph{\textbf{Solution (by Ferran Espuña):}}
+    Let $A$ be the adjacency matrix of $T_{d, k}$.
+    For example, if $d = 3$ and $k = 3$, then
+
+    \begin{center}
+
+    \begin{align*}
+
+        A = \begin{pmatrix}
+            0  &  1  &  1  &  1  &  0  &  0 \\
+            0  &  1  &  1  &  1  &  0  &  0
+        \end{pmatrix}
+
+    \end{align*}
+    \end{center}
+
+
+
+\end{document}
+
