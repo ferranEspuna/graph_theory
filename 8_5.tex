@@ -182,51 +182,44 @@
             Because of the maximum in the formula in the $\infty$-norm,
             we're free to choose the starting vertex $v_i$.
             We will choose the root.
-            We're also free to choose $p = 2k$.
+            We're also free to choose $p = 2mk$ for some $m \in \N$.
 
             To make the count easier, we will consider only some of the paths.
-            Specifically, we will consider paths that start at the root and:
-
-            \begin{enumerate}
-                \item Go straight \emph{down} to a node of depth $h$ in $h$ steps \label{item:down1}
-                \item After that, never go back to a depth lower than $h$
-                and return to depth $h$ after $2(k-h)$ steps\label{around}
-                \item Finally, go straight to depth $2h$ in $h$ steps \label{item:down2}
-            \end{enumerate}
-
-            Where we define $h \coloneqq \left \lfloor k/2 \right \rfloor$, so that there are nodes at depth $2h$.
+            Specifically, we will consider paths that pass through the root
+            at the $2kj$-th step for all $j \in [0, m]$.
 
             \begin{rk}
-                The number of \emph{down} steps is $h + 2(k-h)/2 + h = k + h$.
+                The number of \emph{down} steps is $mk$ because the paths start and end at the root so $s_u = s_d$.
             \end{rk}
 
             \begin{rk}
-                The number of valid orderings for the \emph{up} and \emph{down} steps in~\eqref{around} is
+                The number of valid orderings for the \emph{up} and \emph{down} steps for the steps in between
+                $2jm$ and $2(j+1)m$ is
                 the corresponding \emph{Catalan number}:
                 \begin{equation*}
-                    C_{k-h} = \frac{1}{k-h+1} \binom{2(k-h)}{k-h}
+                    C_{k} = \frac{1}{k+1} \binom{2k}{k}
                 \end{equation*}
-                This is because the path can go as far down as it wants, as the leaves are at distance $k-h$
-                from the level $h$.
+                This is because the path can go as far down as it wants, as the leaves are at distance $k$
+                from the root.
             \end{rk}
 
             All together,
             \begin{align*}
-                    \norm{A(k)}_2^{2k}
-                    & = \norm{A(k)^{2k}}_2
-                    \geq \frac{1}{\sqrt{n}} \norm{A(k)^{2k}}_\infty
-                    \geq \frac{1}{\sqrt{n}} C_{k-h} (d-1)^{k+h} = \\
-                    & = \frac{1}{(k-h+1)\sqrt{n}} \binom{2(k-h)}{k-h} (d-1)^{k+h} \geq
-                    \frac{4^{k-h}(d-1)^{k+h}}{(k-h+1)2\sqrt{kn}} > \\
-                    & > \frac{4^{k-h}(d-1)^{k+h - \frac{k+1}{2}}}{(k-h+1)2\sqrt{k}} \geq
-                    \frac{2^{k}(d-1)^{k-1}}{2 k \sqrt{k}}
+                    \norm{A(k)}_2^{2km}
+                    & = \norm{A(k)^{2km}}_2
+                    \geq \frac{1}{\sqrt{n}} \norm{A(k)^{2km}}_\infty
+                    \geq \frac{1}{\sqrt{n}} C_{k} (d-1)^{mk} = \\
+                    & = \frac{1}{(k+1)\sqrt{n}} \binom{2k}{k}^{m} (d-1)^{mk} \geq
+                    \frac{4^{mk}(d-1)^{mk}}{(k+1)2k^{\frac{m}{2}}\sqrt{n}} >
+                    \frac{4^{mk}(d-1)^{mk - \frac{k+1}{2}}}{(k+1)2k^{\frac{m}{2}}}
             \end{align*}
 
-            Which implies
+            If we now set, for example, $m = k$, we get that
 
             \begin{equation*}
                 \liminf_{k \to \infty} \norm{A(k)}_2 \geq
-                \lim_{k \to \infty} \left( \frac{4^k}{(k+1)2\sqrt{kn}} (d-1)^k \right)^{\frac{1}{2k}}
+                \lim_{k \to \infty} \left( \frac{4^{mk}(d-1)^{mk - \frac{k+1}{2}}}{(k+1)2k^{\frac{m}{2}}} \right)^{\frac{1}{2km}} =
+                \lim_{k \to \infty} 2 \frac{(d-1)^{\frac{1}{2} - \frac{1}{4k} - \frac{1}{4k^2}}}{(k+1)^{\frac{1}{2km}} 2^{\frac{1}{2k^2}} k ^{\frac{1}{4k}}}
                 = 2 \sqrt{d-1}
             \end{equation*}
 
