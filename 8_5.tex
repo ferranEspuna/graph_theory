@@ -151,14 +151,14 @@
                 \leq
                 \sum_{s_d = (p-k)/2}^{(p+k)/2} \binom{p}{s_d} (d-1)^{s_d}
                 \leq
-                2 \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}
+                k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}
             \end{equation*}
 
             Putting this together with~\eqref{eq:norm_bound}, we get
             \begin{equation*}
-                \norm{A}_2^p \leq 2 \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}} \implies
+                \norm{A}_2^p \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}} \implies
                 \norm{A}_2 \leq \lim_{p \to \infty}
-                \left( 2 \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}\right)^{\frac{1}{p}} = 2 \sqrt{d-1}
+                \left(k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}\right)^{\frac{1}{p}} = 2 \sqrt{d-1}
             \end{equation*}
         \end{proof}
     \end{proposition}
