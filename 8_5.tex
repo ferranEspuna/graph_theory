@@ -208,10 +208,10 @@
                     \norm{A(k)}_2^{2mk}
                     & = \norm{A(k)^{2mk}}_2
                     \geq \frac{1}{\sqrt{n}} \norm{A(k)^{2mk}}_\infty
-                    \geq \frac{1}{\sqrt{n}} C_{k} (d-1)^{mk} = \\
-                    & = \frac{1}{(k+1)\sqrt{n}} \binom{2k}{k}^{m} (d-1)^{mk} \geq
-                    \frac{4^{mk}(d-1)^{mk}}{(k+1)2k^{\frac{m}{2}}\sqrt{n}} >
-                    \frac{4^{mk}(d-1)^{mk - \frac{k+1}{2}}}{(k+1)2k^{\frac{m}{2}}}
+                    \geq \frac{1}{\sqrt{n}} C_{k}^m (d-1)^{mk} = \\
+                    & = \frac{1}{(k+1)^m\sqrt{n}} \binom{2k}{k}^{m} (d-1)^{mk} \geq
+                    \frac{4^{mk}(d-1)^{mk}}{(k+1)^m \sqrt{n} 2k^{\frac{m}{2}}} >
+                    \frac{4^{mk}(d-1)^{mk - \frac{k+1}{2}}}{(k+1)^m 2k^{\frac{m}{2}}}
             \end{align*}
 
             If we now set, for example, $m = k$, we get that
@@ -219,7 +219,7 @@
             \begin{equation*}
                 \liminf_{k \to \infty} \norm{A(k)}_2 \geq
                 \lim_{k \to \infty} \left( \frac{4^{mk}(d-1)^{mk - \frac{k+1}{2}}}{(k+1)2k^{\frac{m}{2}}} \right)^{\frac{1}{2km}} =
-                \lim_{k \to \infty} 2 \frac{(d-1)^{\frac{1}{2} - \frac{1}{4k} - \frac{1}{4k^2}}}{(k+1)^{\frac{1}{2km}} 2^{\frac{1}{2k^2}} k ^{\frac{1}{4k}}}
+                \lim_{k \to \infty} 2 \frac{(d-1)^{\frac{1}{2} - \frac{1}{4k} - \frac{1}{4k^2}}}{(k+1)^{\frac{1}{2k}} 2^{\frac{1}{2k^2}} k ^{\frac{1}{4k}}}
                 = 2 \sqrt{d-1}
             \end{equation*}
 
