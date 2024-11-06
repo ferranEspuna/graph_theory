@@ -170,24 +170,57 @@
         \begin{proof}
             We would now like to bound \emph{below} the 2-norm of $A(k)$, so will use the inequality
             $\norm{B}_2 \geq \frac{1}{\sqrt{n}} \norm{B}_\infty$, where $n$ is the size of the matrix.
+            \begin{rk}
+                In our case,
+                \begin{equation*}
+                    n = \sum_{i=0}^{k} (d-1)^i = \frac{(d-1)^{k+1} - 1}{d-2} < (d-1)^{k+1}
+                \end{equation*}
+            \end{rk}
+
             We repeat the same calculation for the number of paths of length $p$ from a given vertex $v_i$,
             but now we need to bound it below.
             Because of the maximum in the formula in the $\infty$-norm,
             we're free to choose the starting vertex $v_i$.
             We will choose the root.
             We're also free to choose $p = 2k$.
-            If we restrict ourselves to paths that come back to the root, we get $s_d = s_u = k$.
-            The number of valid combinations of \emph{up} and \emph{down} steps is
-            the corresponding \emph{Catalan number} $C_k = \frac{1}{k+1} \binom{2k}{k}$.
-            All in all,
-            \begin{equation*}
-                \norm{A(k)}_2^{2k} =
-                \norm{A(k)^{2k}}_2\geq
-                \frac{1}{\sqrt{n}} P_{1, 2k} \geq
-                \frac{1}{\sqrt{n}} C_k (d-1)^k =
-                \frac{1}{(k+1)\sqrt{n}} \binom{2k}{k} (d-1)^k \geq
-                \frac{4^k}{(k+1)2\sqrt{kn}} (d-1)^k
-            \end{equation*}
+
+            To make the count easier, we will consider only some of the paths.
+            Specifically, we will consider paths that start at the root and:
+
+            \begin{enumerate}
+                \item Go straight \emph{down} to a node of depth $h$ in $h$ steps \label{item:down1}
+                \item After that, never go back to a depth lower than $h$
+                and return to depth $h$ after $2(k-h)$ steps\label{around}
+                \item Finally, go straight to depth $2h$ in $h$ steps \label{item:down2}
+            \end{enumerate}
+
+            Where we define $h \coloneqq \left \lfloor k/2 \right \rfloor$, so that there are nodes at depth $2h$.
+
+            \begin{rk}
+                The number of \emph{down} steps is $h + 2(k-h)/2 + h = k + h$.
+            \end{rk}
+
+            \begin{rk}
+                The number of valid orderings for the \emph{up} and \emph{down} steps in~\eqref{around} is
+                the corresponding \emph{Catalan number}:
+                \begin{equation*}
+                    C_{k-h} = \frac{1}{k-h+1} \binom{2(k-h)}{k-h}
+                \end{equation*}
+                This is because the path can go as far down as it wants, as the leaves are at distance $k-h$
+                from the level $h$.
+            \end{rk}
+
+            All together,
+            \begin{align*}
+                    \norm{A(k)}_2^{2k}
+                    & = \norm{A(k)^{2k}}_2
+                    \geq \frac{1}{\sqrt{n}} \norm{A(k)^{2k}}_\infty
+                    \geq \frac{1}{\sqrt{n}} C_{k-h} (d-1)^{k+h} = \\
+                    & = \frac{1}{(k-h+1)\sqrt{n}} \binom{2(k-h)}{k-h} (d-1)^{k+h} \geq
+                    \frac{4^{k-h}(d-1)^{k+h}}{(k-h+1)2\sqrt{kn}} > \\
+                    & > \frac{4^{k-h}(d-1)^{k+h - \frac{k+1}{2}}}{(k-h+1)2\sqrt{k}} \geq
+                    \frac{2^{k}(d-1)^{k-1}}{2 k \sqrt{k}}
+            \end{align*}
 
             Which implies
 
