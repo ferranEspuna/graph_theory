@@ -141,34 +141,40 @@
             \end{equation*}
 
             If we go \emph{up}, there is only one choice (the parent of the current node).
-            If we go \emph{down}, there are at most $d-1$ choices (the children of the current node).
-            Furtheremore, for each choice of $s_d$ there are $\binom{p}{s_d}$ ways to choose the \emph{down} steps.
-            Note that not all the ways of choosing are valid, as we must also ensure that the
-            height stays within the range $[0, k]$ during the whole path.
+            If we go \emph{down}, there are $d-1$ choices (the children of the current node).
+            Furthermore, for each choice of $s_d$ there are $\binom{p}{s_d}$
+            ways to choose the \emph{down} steps.
+            \begin{rk}
+                Not all the ways of choosing are valid, as we should also ensure that the
+                height stays within the range $[0, k]$ during the whole path.
+                However, because we are only interested in an upper bound,
+                we are free to ignore this.
+            \end{rk}
+
             All in all, for all $i$,
             \begin{equation*}
                 P_{i,p}
                 \leq
                 \sum_{s_d = (p-k)/2}^{(p+k)/2} \binom{p}{s_d} (d-1)^{s_d}
                 \leq
-                k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}
+                k \cdot 2^p \cdot (d-1)^{\frac{p+k}{2}}
             \end{equation*}
 
             Putting this together with~\eqref{eq:norm_bound}, we get
             \begin{equation*}
                 \norm{A}_2^p \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}} \implies
                 \norm{A}_2 \leq \lim_{p \to \infty}
-                \left(k \cdot 2^p \cdot (d-1)^{\frac{p}{2}}\right)^{\frac{1}{p}} = 2 \sqrt{d-1}
+                \left(k \cdot 2^p \cdot (d-1)^{\frac{p+k}{2}}\right)^{\frac{1}{p}} = 2 \sqrt{d-1}
             \end{equation*}
         \end{proof}
     \end{proposition}
 
     Similarly, we can rephrase~\ref{item:b} as the following:
     \begin{proposition}
-        $\lim_{k \to \infty} \norm{A(k)} = 2 \sqrt{d - 1}$.
+        $\lim_{k \to \infty} \norm{A(k)}_2 = 2 \sqrt{d - 1}$.
 
         \begin{proof}
-            We would now like to bound \emph{below} the 2-norm of $A(k)$, so will use the inequality
+            We would now like to bound \emph{below} the 2-norm of $A$, so will use the inequality
             $\norm{B}_2 \geq \frac{1}{\sqrt{n}} \norm{B}_\infty$, where $n$ is the size of the matrix.
             \begin{rk}
                 In our case,
@@ -189,45 +195,46 @@
             at the $2kj$-th step for all $j \in [0, m]$.
 
             \begin{rk}
-                The number of \emph{down} steps is $mk$ because the paths start and end at the root so $s_u = s_d$.
+                The number of \emph{down} steps is $mk$
+                because the paths start and end at the root so $s_u = s_d$.
             \end{rk}
 
             \begin{rk}
-                The number of valid orderings for the \emph{up} and \emph{down} steps for the steps in between
+                The number of valid orderings for the \emph{up} and \emph{down}
+                steps for the steps in between
                 $2jm$ and $2(j+1)m$ is
                 the corresponding \emph{Catalan number}:
                 \begin{equation*}
                     C_{k} = \frac{1}{k+1} \binom{2k}{k}
                 \end{equation*}
-                This is because the path can go as far down as it wants, as the leaves are at distance $k$
-                from the root.
+                This is because the path can go as far down as it wants,
+                as the leaves are at distance $k$ from the root.
+                Therefore, there are $C_k^m$ ways to order the
+                \emph{up} and \emph{down} steps for the whole path.
             \end{rk}
 
             All together,
             \begin{align*}
-                    \norm{A(k)}_2^{2mk}
-                    & = \norm{A(k)^{2mk}}_2
-                    \geq \frac{1}{\sqrt{n}} \norm{A(k)^{2mk}}_\infty
-                    \geq \frac{1}{\sqrt{n}} C_{k}^m (d-1)^{mk} = \\
-                    & = \frac{1}{(k+1)^m\sqrt{n}} \binom{2k}{k}^{m} (d-1)^{mk} \geq
-                    \frac{4^{mk}(d-1)^{mk}}{(k+1)^m \sqrt{n} 2k^{\frac{m}{2}}} >
-                    \frac{4^{mk}(d-1)^{mk - \frac{k+1}{2}}}{(k+1)^m 2k^{\frac{m}{2}}}
+                    \norm{A}_2^{2mk}
+                    & = \norm{A^{2mk}}_2
+                    \geq \frac{1}{\sqrt{n}} \norm{A^{2mk}}_\infty
+                    \geq \frac{1}{\sqrt{n}} C_{k}^m (d-1)^{mk} =
+                    \frac{(d-1)^{mk}}{(k+1)^m \cdot \sqrt{n}} \binom{2k}{k}^{m}  \geq \\
+                    & \geq \frac{4^{mk} \cdot (d-1)^{mk}}{(k+1)^m \cdot \sqrt{n} \cdot 2^m \cdot k^{m/2}} >
+                    \frac{4^{mk} \cdot (d-1)^{mk - (k+1)/2}}{(k+1)^m \cdot 2^m \cdot k^{m/2}}
             \end{align*}
 
             If we now set, for example, $m = k$, we get that
 
             \begin{equation*}
                 \liminf_{k \to \infty} \norm{A(k)}_2 \geq
-                \lim_{k \to \infty} \left( \frac{4^{mk}(d-1)^{mk - \frac{k+1}{2}}}{(k+1)^m 2k^{\frac{m}{2}}} \right)^{\frac{1}{2mk}} =
-                \lim_{k \to \infty} 2 \frac{(d-1)^{\frac{1}{2} - \frac{1}{4k} - \frac{1}{4k^2}}}{(k+1)^{\frac{1}{2k}} 2^{\frac{1}{2k^2}} k ^{\frac{1}{4k}}}
+                \lim_{k \to \infty} \left( \frac{4^{mk} \cdot (d-1)^{mk - (k+1)/2}}{(k+1)^m \cdot 2^m \cdot k^{m/2}} \right)^{\frac{1}{2mk}} =
+                \lim_{k \to \infty} 2 \frac{(d-1)^{1/2 \, - \, 1/4k\,  - \, 1/4k^2}}{(k+1)^{1/2k} \cdot 2^{1/2k} \cdot k^{1/4k}}
                 = 2 \sqrt{d-1}
             \end{equation*}
 
-            Together with part~\ref{item:a}, we have that
-
-            \begin{equation*}
-                \lim_{k \to \infty} \norm{A(k)}_2 = 2 \sqrt{d-1}
-            \end{equation*}
+            Together with part~\ref{item:a}, we have
+             $\lim_{k \to \infty} \norm{A(k)}_2 = 2 \sqrt{d-1}$
 
         \end{proof}
     \end{proposition}
