@@ -70,7 +70,7 @@
 
     \vspace{0.5cm}
 
-    \noindent \textbf{Problem 4:}
+    \noindent \textbf{Problem 5:}
     Let $T_{d, k}$ be a $(d-1)$-ary rooted tree of height $k$.
     Show that
 
@@ -118,13 +118,13 @@
             \end{equation}
 
             Which is just a row sum of $A^p$.
-            This corresponds to the number $P_{i, p}$ of paths of length $p$ from a given vertex $v_i$.
+            This corresponds to the number $P_{i, p}$ of walks of length $p$ from a given vertex $v_i$.
             Let's try to approximate this number.
 
-            At each step of the path, the height (distance from the root) either increases by $1$
+            At each step of the walk, the height (distance from the root) either increases by $1$
             (we say we go \emph{down})
             or decreases by $1$ (we say we go \emph{up}).
-            Because both at the start and end of the path the height must be in the range $[0, k]$,
+            Because both at the start and end of the walk the height must be in the range $[0, k]$,
             the difference between the number of \emph{up} steps $s_{u}$
             and the number of \emph{down} steps $s_{d}$ must satisfy
 
@@ -135,36 +135,37 @@
             \begin{equation*}
                 s_{u} + s_{d} = p
             \end{equation*}
-            All together,
+            In particular,
             \begin{equation*}
-                \frac{p-k}{2} \leq s_d \leq  \frac{p+k}{2}
+                s_d \leq  \frac{p+k}{2}
             \end{equation*}
 
             If we go \emph{up}, there is only one choice (the parent of the current node).
             If we go \emph{down}, there are $d-1$ choices (the children of the current node).
-            Furthermore, for each choice of $s_d$ there are $\binom{p}{s_d}$
-            ways to choose the \emph{down} steps.
+            Because of this, if we fix a sequence \emph{up} and \emph{down} steps, there are at most
+            $(d-1)^{(p+k) / 2}$ walks from a given node satisfying that sequence.
+            Furthermore, there are $2^p$ such sequences.
             \begin{rk}
-                Not all the ways of choosing are valid, as we should also ensure that the
-                height stays within the range $[0, k]$ during the whole path.
+                Not all sequences of \emph{up} and \emph{down} steps
+                are valid, as we should also ensure that the
+                height stays within the range $[0, k]$ during the whole walk.
                 However, because we are only interested in an upper bound,
                 we are free to ignore this.
             \end{rk}
 
             All in all, for all $i$,
             \begin{equation*}
-                P_{i,p}
-                \leq
-                \sum_{s_d = (p-k)/2}^{(p+k)/2} \binom{p}{s_d} (d-1)^{s_d}
-                \leq
-                k \cdot 2^p \cdot (d-1)^{\frac{p+k}{2}}
+                P_{i,p} \leq
+                2^p \cdot (d-1)^{\frac{p+k}{2}}
             \end{equation*}
 
             Putting this together with~\eqref{eq:norm_bound}, we get
             \begin{equation*}
-                \norm{A}_2^p \cdot k \cdot 2^p \cdot (d-1)^{\frac{p}{2}} \implies
+                \norm{A}_2^p \leq
+                P_{i, p} \leq
+                2^p \cdot (d-1)^{\frac{p+k}{2}} \implies
                 \norm{A}_2 \leq \lim_{p \to \infty}
-                \left(k \cdot 2^p \cdot (d-1)^{\frac{p+k}{2}}\right)^{\frac{1}{p}} = 2 \sqrt{d-1}
+                \left(2^p \cdot (d-1)^{\frac{p+k}{2}}\right)^{\frac{1}{p}} = 2 \sqrt{d-1}
             \end{equation*}
         \end{proof}
     \end{proposition}
@@ -183,20 +184,20 @@
                 \end{equation*}
             \end{rk}
 
-            We repeat the same calculation for the number of paths of length $p$ from a given vertex $v_i$,
+            We repeat the same calculation for the number of walks of length $p$ from a given vertex $v_i$,
             but now we need to bound it below.
             Because of the maximum in the formula in the $\infty$-norm,
             we're free to choose the starting vertex $v_i$.
             We will choose the root.
             We're also free to choose $p = 2mk$ for some $m \in \N$.
 
-            To make the count easier, we will consider only some of the paths.
-            Specifically, we will consider paths that pass through the root
+            To make the count easier, we will consider only some of the walks.
+            Specifically, we will consider walks that pass through the root
             at the $2kj$-th step for all $j \in [0, m]$.
 
             \begin{rk}
                 The number of \emph{down} steps is $mk$
-                because the paths start and end at the root so $s_u = s_d$.
+                because the walks start and end at the root so $s_u = s_d$.
             \end{rk}
 
             \begin{rk}
@@ -207,10 +208,10 @@
                 \begin{equation*}
                     C_{k} = \frac{1}{k+1} \binom{2k}{k}
                 \end{equation*}
-                This is because the path can go as far down as it wants,
+                This is because the walk can go as far down as it wants,
                 as the leaves are at distance $k$ from the root.
                 Therefore, there are $C_k^m$ ways to order the
-                \emph{up} and \emph{down} steps for the whole path.
+                \emph{up} and \emph{down} steps for the whole walk.
             \end{rk}
 
             All together,

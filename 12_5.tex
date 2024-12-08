@@ -1,0 +1,219 @@
+\documentclass{amsart}
+\renewcommand{\baselinestretch}{1.1}
+\setlength{\parskip}{2mm}
+
+\pagestyle{empty}
+
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage[margin=70pt]{geometry}
+\setlength{\parindent}{0pt}
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+\usepackage{xcolor}
+
+
+
+\newtheorem*{theirtheorem}{Theorem}
+\newtheorem*{theirproposition}{Proposition}
+
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{\textbf{Theorem}}
+\newtheorem*{lemma}{\textbf{Lemma}}
+\newtheorem*{corollary}{\textbf{Corollary}}
+\newtheorem*{proposition}{\textbf{Proposition}}
+\newtheorem*{claim}{\textbf{Claim}}
+\newtheorem*{conjecture}{\textbf{Conjecture}}
+
+\theoremstyle{definition}
+\newtheorem*{rk}{\textbf{Remark}}
+
+\newcommand{\Summ}[1]{\underset{#1}{\sum}}
+\newcommand{\sti}[2]{\left\{\begin{array}{c} #1 \\ #2 \end{array}\right\}}
+
+\newcommand{\diam}{\emph{diam}}
+\newcommand{\conv}{\mbox{Conv}}
+\newcommand{\C}{\mathcal {C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\D}{\mathcal{D}}
+
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\newcommand{\ov}[1]{\overline{#1}}
+
+\newcommand{\nn}{\nonumber}
+
+\newcommand{\st}{2}
+
+\thispagestyle{empty}
+
+\begin{document}
+
+    {\Large Graph Theory -- MAMME}
+    {\Large Session 2 -- Extremal Graph Theory II: Regularity Lemma}
+
+    \vspace{0.5cm}
+
+    \hrule
+
+    \vspace{0.5cm}
+
+    \noindent \textbf{Problem 4:}
+    Prove the following color version of Szemerédi's Regularity Lemma:
+    For every $\varepsilon > 0$ and $r \in \N$ there exists $M \in \N$ such that
+    for every edge-colored graph $G$ with $r$ colors, there exists a partition of the vertex set
+    $V(G) = V_1 \cup \ldots \cup V_k$ with $M \leq k \leq M$ such that
+    all but at most $\varepsilon k^2$ pairs $(V_i, V_j)$ are $\varepsilon$-regular in each color class.
+
+
+    \paragraph{\textbf{Solution (by Ferran Espuña):}}
+
+    The notion of $\varepsilon$-regularity stated in the problem is slightly different from the one we saw in class.
+    We will for now ignore this and adress it later.
+    To start, we will prove:
+
+    \begin{proposition}
+        For every $\varepsilon > 0$ and $r \in \N$ there exists $M \in \N$ such that
+        for every graph $G$ on $n$ vertices, edge-colored with $r$ colors, there exists a partition of the vertex set
+        $V(G) = V_1 \cup \ldots \cup V_k$ with $M \leq k \leq M$ such that, in each color class,
+
+        \[
+             \sum_{\substack{V_i, V_j \text{ not } \\ \varepsilon-regular}} \lvert V_i \rvert \lvert V_j \rvert \leq \varepsilon n^2
+        \]
+
+        That is, the partition is $\varepsilon$-regular in each color class.
+
+        \begin{proof}
+            The proof is analogous to the Szemerédi's Regularity Lemma proof we saw in class.
+            We start with the trivial partition and keep refining it.
+            For a partition $\pi$ and a color $c$, let
+
+            \[
+                d_2(\pi, c) = \sum_{V_i, V_j \in \pi} \frac{\lvert V_i \rvert \lvert V_j \rvert}{n^2} d_c(V_i, V_j)
+            \]
+
+            where the densitiy $d_c(V_i, V_j)$ is the proportion of pairs $(v_i, v_j)$ that are colored $c$.
+            We know from class that this quantity does not decrease when refining the partition.
+            Also, we know that if $\pi$ is not $\varepsilon$-regular, in color class $c$, then there exists
+            a refinement $\pi'$ such that $\lvert \pi' \rvert \leq \lvert \pi \rvert 2^{2 \lvert \pi \rvert}$ and
+
+            \[
+                d_2(\pi', c) \geq d_2(\pi, c) + \varepsilon^5
+            \]
+
+            Finally, we also know that this quantity is between $0$ and $1$.
+            We can apply the same density increment argument as in class to the vector
+
+            \[
+                \left( d_2(\pi, 1), \ldots, d_2(\pi, r) \right)
+            \]
+
+            In each step, if there is still a color class $i$ such that $\pi$ is not $\varepsilon$-regular,
+            in the color class $i$, we can refine the partition to increase the $i$th coordinate of the vector
+            by at least $\varepsilon^5$, while the other coordinates don't decrease.
+            Therefore, this process
+            must stop after at most $\frac{r}{\varepsilon^5}$ steps,
+            at which point the partition is $\varepsilon$-regular in each color class
+            and the number of parts is bounded by a tower of $2$s of height at most $\frac{2r}{\varepsilon^5}$. \qedhere
+
+        \end{proof}
+    \end{proposition}
+
+    \newpage
+
+    The question now is how we can adapt this proof to the different notion of
+    $\varepsilon$-regularity stated in the problem.
+    The two would be equivalent if it were not for the fact that the size of the parts of a partition can
+    be very different.
+    We need to find a way to refine a partition at the end of each step
+    such that the sizes of the parts at the end
+    are more balanced.
+    Given a partition with $k$ parts, we will aim for about $k^2$ parts.
+    Suppose that
+
+    \[
+        (a - 1) \frac{n}{k^2} < \lvert V_i \rvert \leq a \frac{n}{k^2}
+    \]
+
+    Then, we will split $V_i$ into $a$ parts of size at most $\frac{n}{k^2}$.
+    This will give us a partition with number of parts $k'$ satisfying
+
+    \[
+        k^2 = \sum_{i} \frac{\lvert V_i \rvert k^2}{n} \leq k' \leq \sum_{i} 1 + \frac{\lvert V_i \rvert k^2}{n} = k^2 + k
+    \]
+
+    Note that the upper bound is just a function of $k$.
+    This means that the argument above works exactly the same but with a higher
+    bound on the number of parts.
+    However, at each step, we may assume that any part $V_i'$ satisfies
+
+    \begin{equation} \label{eq:bound}
+        k' \lvert V_i' \rvert \leq \frac{n}{k^2}(k^2 + k) = n\left(1 + \frac{1}{k}\right) \leq  n\left(1 + \hat{\varepsilon} \right)
+    \end{equation}
+
+    Where we can make $\hat{\varepsilon} \coloneqq \frac{1}{k}$ as small as we'd like depending on $\varepsilon$
+    by starting the process with an arbitrary partition with a large number of parts.
+
+    Now, suppose that, for some color class $c$, we have more than
+    $\varepsilon k^2$ pairs $(V_i, V_j)$ that are not $\varepsilon$-regular.
+    We can write this as
+
+    \begin{equation} \label{eq:many_pairs}
+        \sum_{\substack{V_i, V_j \text{ not } \\ \varepsilon-regular}} 1 \geq \varepsilon k^2
+    \end{equation}
+
+    We will do the same density increment argument as before, but now with $\varepsilon' = \frac{\varepsilon}{2}$.
+    Suppose, by way of contradiction, that
+
+    \begin{equation}\label{eq:contradiction}
+        \sum_{\substack{V_i, V_j \text{ not } \\ \varepsilon'-regular}} \lvert V_i \rvert \lvert V_j \rvert < \varepsilon' n^2 = \frac{\varepsilon n^2}{2}
+    \end{equation}
+
+    Multiplying~\eqref{eq:many_pairs} by $\left(\frac{n}{k}\right)^2$ and substracing~\eqref{eq:contradiction} from it, we get
+
+    \begin{equation}\label{eq:combined}
+        \sum_{\substack{V_i, V_j \text{ not } \\ \varepsilon'-regular}} \left( \frac{n}{k} \right)^2 - \lvert V_i \rvert \lvert V_j \rvert > \frac{\varepsilon n^2}{2}
+    \end{equation}
+
+    Note, however, that if we extend the sum to all pairs $(V_i, V_j)$, (including the same part twice), we get $-\text{Var}(X) < 0$,
+    where $X$ is the size of a part of the partition chosen uniformly at random.
+    This means that there is a set of pairs $I \subset \pi^2$ satisfying
+
+    \begin{equation*}\label{eq:others}
+        \sum_{(V_i, V_j) \in I} \left( \frac{n}{k} \right)^2 - \lvert V_i \rvert \lvert V_j \rvert <  - \frac{\varepsilon n^2}{2}
+        \implies \sum_{(V_i, V_j) \in I} \lvert V_i \rvert \lvert V_j \rvert > \frac{\varepsilon n^2}{2} + \lvert I \rvert \left( \frac{n}{k} \right)^2
+    \end{equation*}
+
+    Multiplying by $k^2$, and applying the bound on the relative size of the parts we obtained in~\eqref{eq:bound}, we get
+
+    \begin{equation*}\label{eq:equation}
+        n^2 \left( \frac{\varepsilon k^2}{2} + \lvert I \rvert \right) < \lvert I \rvert \, n^2 \left( 1 + \hat{\varepsilon} \right)
+        \implies \frac{\varepsilon k^2}{2 \lvert I \rvert} + 1 < 1 + \hat{\varepsilon}
+        \implies \frac{\varepsilon k^2}{2 \lvert I \rvert} < \hat{\varepsilon}
+    \end{equation*}
+
+    But obviously $\lvert I \rvert \leq k^2$ so $\frac{\varepsilon}{2} < \hat{\varepsilon}$, which is a contradiction
+    if we choose $\varepsilon$ small enough.
+    This means that~\eqref{eq:contradiction} cannot hold,
+    so the partition is not $\varepsilon'$-regular in color class $c$, allowing us to refine
+    the partition further.
+    The rest of the argument follows as before, but the density increment is now $(\frac{\varepsilon}{2})^5$
+    and $\lvert \pi' \rvert \leq f\left( \lvert \pi \rvert 2^{2 \lvert \pi \rvert}\right)$,
+    where $f(k) = k(k+1)$.
+
+\end{document}
+
