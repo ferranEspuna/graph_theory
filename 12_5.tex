@@ -64,7 +64,7 @@
 \begin{document}
 
     {\Large Graph Theory -- MAMME}
-    {\Large Session 2 -- Extremal Graph Theory II: Regularity Lemma}
+    {\Large Session 12 -- Extremal Graph Theory II: Regularity Lemma}
 
     \vspace{0.5cm}
 
@@ -83,7 +83,7 @@
     \paragraph{\textbf{Solution (by Ferran Espuña):}}
 
     The notion of $\varepsilon$-regularity stated in the problem is slightly different from the one we saw in class.
-    We will for now ignore this and adress it later.
+    We will for now ignore this and address it later.
     To start, we will prove:
 
     \begin{proposition}
@@ -103,10 +103,10 @@
             For a partition $\pi$ and a color $c$, let
 
             \[
-                d_2(\pi, c) = \sum_{V_i, V_j \in \pi} \frac{\lvert V_i \rvert \lvert V_j \rvert}{n^2} d_c(V_i, V_j)
+                d_2(\pi, c) = \sum_{V_i, V_j \in \pi} \frac{\lvert V_i \rvert \lvert V_j \rvert}{n^2} d_c(V_i, V_j)^2
             \]
 
-            where the densitiy $d_c(V_i, V_j)$ is the proportion of pairs $(v_i, v_j)$ that are colored $c$.
+            where the density $d_c(V_i, V_j)$ is the proportion of pairs $(v_i, v_j)$ that are colored $c$.
             We know from class that this quantity does not decrease when refining the partition.
             Also, we know that if $\pi$ is not $\varepsilon$-regular, in color class $c$, then there exists
             a refinement $\pi'$ such that $\lvert \pi' \rvert \leq \lvert \pi \rvert 2^{2 \lvert \pi \rvert}$ and
@@ -137,7 +137,7 @@
 
     The question now is how we can adapt this proof to the different notion of
     $\varepsilon$-regularity stated in the problem.
-    The two would be equivalent if it were not for the fact that the size of the parts of a partition can
+    The two would be equivalent if it were not for the fact that the sizes of the parts of a partition can
     be very different.
     We need to find a way to refine a partition at the end of each step
     such that the sizes of the parts at the end
